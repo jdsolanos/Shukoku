@@ -53,7 +53,8 @@ public class MySimpleLinkedList <T>{
             }
             while (aux.getNext()!= null){
                 if (aux.getNext().getData().equals(t)){
-                    aux.setNext(aux.getNext().getNext());
+                    aux1 = aux.getNext();
+                    aux.setNext(aux1.getNext());
                     return t;
                 }
                 aux1 = aux.getNext();
