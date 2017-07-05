@@ -28,37 +28,58 @@ public class MySimpleLinkedList <T>{
             n.setNext(first);
         }
         first = n;
+        len = len+1;
     }
-    public boolean inList(T t){
+    private int posInList(T t){
         if(!isEmpty()){
             Node aux = first;
             Node aux1;
+            int cont=0;
             while (!isEmpty()){
                 if (aux.data.equals(t)){
-                return true;
+                return cont;
                 }
                 aux1 = aux.getNext();
                 aux = aux1;
+                cont++;
             }
         }
-        return false;
+        return -1;
     }
     
     public T del(T t){
-        if(!isEmpty()){
-            Node aux = first;
-            Node aux1;
-            if(aux.getData().equals(t)){
-                first = aux.getNext();
-            }
-            while (aux.getNext()!= null){
-                if (aux.getNext().getData().equals(t)){
-                    aux1 = aux.getNext();
-                    aux.setNext(aux1.getNext());
-                    return t;
+        int pos = posInList(t);
+        if (pos == -1)
+            return null;
+        
+        return delPos(pos);
+                
+    }
+    
+    public T delPos(int pos){
+ 
+        Node<T> aux = first;
+        Node<T> prev = null;
+        int cont = 0;
+ 
+        if(pos<0 || pos >= len){
+            System.out.println("La posicion insertada no es correcta");
+        }else{
+            while(aux!= null){
+                if (pos == cont){
+                    if (prev == null){
+                        first = first.getNext();
+                    }else {
+                        //Actualizamos el anterior
+                        prev.setNext(aux.getNext());
+                    }
+                    len--;
+                    return aux.getData();
+                }else{
+                    prev=aux;
+                    aux=aux.getNext();
+                    cont++;
                 }
-                aux1 = aux.getNext();
-                aux = aux1;
             }
         }
         return null;
