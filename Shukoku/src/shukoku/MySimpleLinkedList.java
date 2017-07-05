@@ -11,11 +11,13 @@ package shukoku;
  */
 public class MySimpleLinkedList <T>{
     Node <T> first;
+    int len;
     public MySimpleLinkedList(){
         emptyList();
     }
     private void emptyList(){
         first = null;
+        len   = 0;
     }
     public boolean isEmpty(){
         return first == null;
@@ -27,19 +29,39 @@ public class MySimpleLinkedList <T>{
         }
         first = n;
     }
-    public T del(T t){
-        Node aux = first;
-        Node aux1;
-        while (!isEmpty()){
-            if (aux.data.equals(t)){
-            return t;
+    public boolean inList(T t){
+        if(!isEmpty()){
+            Node aux = first;
+            Node aux1;
+            while (!isEmpty()){
+                if (aux.data.equals(t)){
+                return true;
+                }
+                aux1 = aux.getNext();
+                aux = aux1;
             }
-            aux1 = aux.getNext();
-            aux = aux1;
+        }
+        return false;
+    }
+    
+    public T del(T t){
+        if(!isEmpty()){
+            Node aux = first;
+            Node aux1;
+            if(aux.getData().equals(t)){
+                first = aux.getNext();
+            }
+            while (aux.getNext()!= null){
+                if (aux.getNext().getData().equals(t)){
+                    aux.setNext(aux.getNext().getNext());
+                    return t;
+                }
+                aux1 = aux.getNext();
+                aux = aux1;
+            }
         }
         return null;
     }
-    
     public static class Node <T>{
         private T data;
         private Node <T> next;
