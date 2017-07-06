@@ -16,6 +16,13 @@ public class Shukoku {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MySimpleLinkedList <Integer> l = new MySimpleLinkedList<>();
+        for (int i=9;i>0;i--){
+            l.addFirst(i);
+        }
+        for(int i=0;i<9;i++){
+            System.out.println(l.del(i+1));
+        }   
     }
     
 }
